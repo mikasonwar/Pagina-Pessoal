@@ -1,0 +1,83 @@
+<html>
+<meta charset="utf-8">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script> -->
+
+
+
+<body>
+  <button type="button" id="button" onclick="" class="btn btn-primary remover" style="margin:10px;"> Desativar animação </button>
+<div class="row">
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+  <div class="transitions col-md-1"> </div>
+</div>
+<div class="teste" id="teste">
+
+<div class="logobg">
+
+<div class="logoE">
+  <div class="Ea"> </div>
+  <div class="Eb"> </div>
+  <div class="Ec"> </div>
+</div>
+
+<div class="separador"> </div>
+
+<div class="logoR">
+  <div class="Ra"> </div>
+  <div class="Rb"> </div>
+  <div class="Rc"> </div>
+</div>
+
+<div class="texto">Escola Profissional</div>
+
+<div class="logoC">
+  <div class="Ca"> </div>
+  <div class="Cb"> </div>
+  <div class="Cc"> </div>
+</div>
+  </div>
+</div>
+
+</body>
+
+<script>
+document.getElementById("button").onclick = function() {myFunction()};
+
+function myFunction() {
+  if ( document.getElementById("button").classList.contains('remover') )
+  {
+       document.getElementById('teste').classList.remove('teste');
+
+       document.getElementById("button").classList.remove('remover');
+       document.getElementById("button").classList.add('adicionar');
+       document.getElementById("button").innerHTML = "Ativar animação";
+  }
+  else if ( document.getElementById("button").classList.contains('adicionar') )
+  {
+    document.getElementById('teste').classList.add('teste');
+
+    document.getElementById("button").classList.remove('adicionar');
+    document.getElementById("button").classList.add('remover');
+         document.getElementById("button").innerHTML = "Desativar animação";
+  }
+}
+
+</script>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</html>
