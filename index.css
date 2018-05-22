@@ -11,12 +11,28 @@ body {
   background-position: center;
 }
 
-@media only screen and (min-width: 600px) {
-  .principal { width:90vw; }
-  .avatar {width:90%;}
+@media screen and (max-width: 600px) {
+  .principal{width:90% !important;}
+  .experiencia{flex: 1 100% !important;}
+  .containerexperiencia{flex-direction: column !important;}
 }
+ @media screen and (max-width: 500px){
+  .links > a {margin-right: 5px !important;}
+  .links > a > img {width:40px !important;height:40px !important;}
+  .linksdireita > a > img {width:40px !important;height:40px !important;}
+  .espacolinks{height: 50px !important;}
+ }
+
 .conteudo {
   padding: 10px;
+}
+
+.teste {
+  display: block;
+  width:200px;
+  height: 200px;
+  position: absolute;
+  background-color: red;
 }
 
 .containerexperiencia {
@@ -34,9 +50,12 @@ body {
   background-color: #c6d1ffeb;
   width: 700px;
   margin: auto;
+  padding: 10px;
   border-radius: 20px;
   position: relative;
 }
+
+
 
 .headercat{
   padding:0px;
@@ -109,16 +128,22 @@ body {
 }
 
 .header {
-  width: 400px;
+  flex: 1 100%;
   margin: auto;
   padding-top: 20px;
   text-align: center;
-  margin-bottom: 10px
+  margin-bottom: 10px;
+  min-width: 0;
+  margin: 5px;
 }
 
 .avatar {
   border-radius: 90px;
   margin-bottom: 15px;
+  margin:auto;
+  width: 400px;
+  max-width: 100%;
+  max-height: 250px;
 }
 
 .hnome {
@@ -134,12 +159,12 @@ body {
   background-color: #929BB5FF;
   margin-bottom: 10px;
 }
+
 .separadorcat{
   flex: 1 100%;
   height: 2px;
   background-color: #74BED8FF;
 }
-
 
 .alcunha {
   font-family: 'Roboto Mono', monospace;
@@ -168,6 +193,16 @@ body {
 
 .links > a {
   margin-right: 15px
+}
+
+.links > a > img {
+  width:60px;
+  height: 60px;
+}
+
+.linksdireita > a > img {
+  width: 60px;
+  height: 60px;
 }
 
 .ulinks:hover {
