@@ -7,6 +7,31 @@ $(document).ready(function(){
   $("#cstaffantiga").hide();
   $("#chabilidades").hide();
 
+  $(".tab").on("mouseenter", function(){
+    $(".tabactive").addClass('abaativa');
+    $(".tabactive").removeClass('tabactive');
+  });
+
+  $(".tab").on("mouseleave", function(){
+    $(".abaativa").addClass('tabactive');
+    $(".abaativa").removeClass('abaativa');
+  });
+
+  $(".tab").on("click", function(){
+    $(".tabactive").removeClass('tabactive');
+    $(".abaativa").removeClass('abaativa');
+    $(this).addClass('tabactive')
+    $(".tabmanager").hide();
+  });
+
+  $("#Experiencia").on("click", function(){
+    $(".containerexperiencia").show();
+  });
+
+  $("#Testes").on("click", function(){
+    $(".containertestes").show();
+  });
+
   $("#videojogos").on("click",function(){
     $("#cvideojogos").slideToggle();
   });

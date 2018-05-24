@@ -23,6 +23,8 @@ body {
   .links > a > img {width:40px !important;height:40px !important;}
   .linksdireita > a > img {width:40px !important;height:40px !important;}
   .espacolinks{height: 50px !important;}
+  .tabtexto {font-size: 14px !important;padding-top: 6% !important;}
+  .tab {width: 30% !important;}
  }
 
 .conteudo {
@@ -46,6 +48,23 @@ body {
 .containerexperiencia {
   display: flex;
   flex-direction: row;
+}
+
+.containertestes {
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+  padding: 5px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+.conteudoteste{
+  padding: 10px;
+  width: 90%;
+  margin:auto;
+  margin-top: 5px;
+  background-color: gray;
 }
 
 .percentagem {
@@ -209,6 +228,35 @@ body {
   display: none;
 }
 
+.tab {
+  width: 20%;
+  height: 20px;
+  background-color: #71778a;
+  padding: 3px;
+  border-radius: 10px 10px 0px 0px;
+  margin-right: 5px;
+}
+
+.tab:hover{
+  background-color: #929BB5FF;
+}
+
+.tabtexto {
+  margin:auto;
+  display: block;
+  padding-top: 3%;
+  padding-left: 12%;
+}
+
+.tabs{
+  display: flex;
+  flex direction: row;
+}
+
+.tabactive {
+  background-color: #929BB5FF;
+}
+
 .conteudohabilidade {
   display: flex;
   flex-direction: column;
@@ -230,7 +278,7 @@ body {
 
 .separador {
   flex: 1 100%;
-  height: 3px;
+  height: 7px;
   background-color: #929BB5FF;
   margin-bottom: 10px;
 }
