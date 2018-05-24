@@ -10,6 +10,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  font-family: 'Questrial', sans-serif;
 }
 
 @media screen and (max-width: 600px) {
@@ -28,6 +29,7 @@ body {
   padding: 10px;
 }
 
+
 .grayed {
   -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
   filter: grayscale(80%);
@@ -45,6 +47,47 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.percentagem {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.bom > div {
+  background-color: #03a203;
+  width: 8%;
+  height: 20px;
+  border: 2px;
+  border-style: solid;
+  border-color: #045604;
+  margin: 1px;
+  border-radius: 3px;
+}
+.meh > div {
+  background-color: #d6d628;
+  width: 8%;
+  height: 20px;
+  border: 2px;
+  border-style: solid;
+  border-color: #8a8a07;
+  margin: 1px;
+  border-radius: 3px;
+}
+.mau > div {
+  background-color: #ff3b3b;
+  width: 8%;
+  height: 20px;
+  border: 2px;
+  border-style: solid;
+  border-color: #7d1919;
+  margin: 1px;
+  border-radius: 3px;
+}
+
+
 
 .experiencia {
   flex: 1 50%;
@@ -143,17 +186,45 @@ body {
 
 .avatar {
   border-radius: 90px;
-  margin-bottom: 15px;
   margin:auto;
+  margin-bottom: 5px;
   width: 400px;
   max-width: 100%;
   max-height: 250px;
 }
 
+.hidden{
+ display: block;
+ flex:1 100%;
+ background-color: #3f92ff;
+ border-radius:900px;
+ margin:auto;
+ margin-top: 0px;
+ padding:10px;
+ padding-top: 0px;
+ font-size: 14px;
+ align-self: center;
+}
+.Jquery {
+  display: none;
+}
+
+.conteudohabilidade {
+  display: flex;
+  flex-direction: column;
+}
+
+.habilidadebg {
+  flex: 1 100%;
+  background-color: #6896d2;
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
 .hnome {
   font-family: 'Questrial', sans-serif;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 5vw;
   color: #3997a2;
 }
 
