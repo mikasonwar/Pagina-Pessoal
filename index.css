@@ -50,6 +50,7 @@ body {
   flex-direction: row;
 }
 
+
 .containertestes {
   display: flex;
   flex-direction: column;
@@ -272,7 +273,7 @@ body {
 .hnome {
   font-family: 'Questrial', sans-serif;
   font-weight: bold;
-  font-size: 50px;
+  font-size: 5vw;
   color: #3997a2;
 }
 
