@@ -6,8 +6,13 @@ body {
   #e4c244,
   #e4c244 10px,
   #887a18 10px,
-  #887a18 20px
-);
+  #887a18 20px);
+  background-image: url(resources/images/bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color:black;
 }
 .container {
   display: flex;
@@ -25,12 +30,26 @@ body {
 }
 
 .principal {
-  background-color: #d6a840eb;
+  background-color: rgba(214, 168, 64, 0.92);
   width: 700px;
   margin: auto;
   padding: 10px;
   border-radius: 20px;
   position: relative;
+}
+
+.alert {
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(204, 98, 34);
+  border-radius: 5px;
+  color: rgb(255, 186, 132);
 }
 
 .separador {
@@ -76,6 +95,7 @@ h1 {
 button {
   display: block;
   padding: 10px;
+  color:black;
   background-color: #ff8d00;
   font-family: 'Open Sans', sans-serif;
   border-width: 0px;

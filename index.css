@@ -112,12 +112,12 @@ body {
 
 .experiencia {
   flex: 1 50%;
-  background-color: #81AADFFF;
+  background-color: rgb(129, 170, 223);
   margin:10px;
 }
 
 .principal {
-  background-color: #c6d1ffeb;
+  background-color: rgba(198, 209, 255, 0.92);
   width: 700px;
   margin: auto;
   padding: 10px;
@@ -137,6 +137,7 @@ body {
 }
 
 .texto {
+  display: block;
   padding:10px;
   font-family: 'Open Sans', sans-serif;
 }
@@ -155,7 +156,7 @@ body {
 }
 
 .admin {
-  color:#C50000FF;
+  color:rgb(197, 0, 0);
 }
 
 .vp {
@@ -233,14 +234,14 @@ body {
 .tab {
   width: 20%;
   height: 20px;
-  background-color: #71778a;
+  background-color: rgb(113, 119, 138);
   padding: 3px;
   border-radius: 10px 10px 0px 0px;
   margin-right: 5px;
 }
 
 .tab:hover{
-  background-color: #929BB5FF;
+  background-color: rgb(146, 155, 181);
 }
 
 .tabtexto {
@@ -256,7 +257,7 @@ body {
 }
 
 .tabactive {
-  background-color: #929BB5FF;
+  background-color: rgb(146, 155, 181);
 }
 
 .conteudohabilidade {
@@ -279,16 +280,15 @@ body {
 }
 
 .separador {
-  flex: 1 100%;
   height: 7px;
-  background-color: #929BB5FF;
+  background-color: rgb(146, 155, 181);
   margin-bottom: 10px;
 }
 
 .separadorcat{
   flex: 1 100%;
   height: 2px;
-  background-color: #74BED8FF;
+  background-color: rgb(116, 190, 216);
 }
 
 .alcunha {
@@ -304,7 +304,6 @@ body {
 }
 
 .espacolinks{
-  flex: 1 100%;
   height: 70px;
   display: block;
 }

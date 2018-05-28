@@ -1,18 +1,34 @@
-var caes = 0;
-var preco = [50,500];
-var posse = [0,0];
-var precoupg = [0,10000];
-var upg = [1,0];
-var cps = [1, 10];
+if(Cookies.get('save')=='true') {
+  var caes = parseFloat(Cookies.get('caes'));
+  var preco = Cookies.getJSON('preco');
+  var posse = Cookies.getJSON('posse');
+  var precoupg = Cookies.getJSON('precoupg');
+  var upg = Cookies.getJSON('upg');
+  var cps = Cookies.getJSON('cps');
+  } else {
+  var caes = 0;
+  var preco = [50,500];
+  var posse = [0,0];
+  var precoupg = [0,10000];
+  var upg = [1,0];
+  var cps = [1, 10];
+  }
 
 
 
 $(document).ready(function(){
 
+//  alert(Cookies.get('caes'));
+//  alert(Cookies.get('preco').replace(/[\[\]]/g, '').split(","));
+//  alert(Cookies.get('posse').replace(/[\[\]]/g, '').split(","));
+//  alert(Cookies.get('precoupg').replace(/[\[\]]/g, '').split(","));
+//  alert(Cookies.get('upg').replace(/[\[\]]/g, '').split(","));
+//  alert(Cookies.get('cps').replace(/[\[\]]/g, '').split(","));
+
 $("#numero").html(caes+" Cães");
 $("#price1").html(preco[1]);
 $("#priceup1").html(precoupg[1]);
-
+Guardar(false);
 window.setInterval(function(){
   caes+=resumir(1);
   $("#numero").html(caes+" Cães");
@@ -37,10 +53,39 @@ window.setInterval(function(){
 
 }, 5)
 
-$("#teste").click(function(){
-document.cookie = "caes="+caes+"; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/";
-document.cookie = "caes=1; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/";
+window.setInterval(function(){
+  Guardar(true);
+}, 60000)
+
+$("#salvar").click(function(){
+  Guardar(true);
 });
+
+$("#apagar").click(function(){
+  if(confirm("Tem a certeza?")){
+    Cookies.remove('caes');
+    Cookies.remove('preco');
+    Cookies.remove('posse');
+    Cookies.remove('precoupg');
+    Cookies.remove('upg');
+    Cookies.remove('cps');
+    Cookies.set('save', false, { expires: 365, path: '' });
+    location.reload();
+  }
+})
+
+function Guardar(bool){
+  Cookies.set('caes', caes, { expires: 365, path: '' });
+  Cookies.set('precoupg', precoupg, { expires: 365, path: '' });
+  Cookies.set('preco', preco, { expires: 365, path: '' });
+  Cookies.set('posse', posse, { expires: 365, path: '' });
+  Cookies.set('upg', upg, { expires: 365, path: '' });
+  Cookies.set('cps', cps, { expires: 365, path: '' });
+  Cookies.set('save', true, { expires: 365, path: '' });
+  if(bool==true) {
+  $(".alert").show().delay(10000).fadeOut();
+  }
+}
 
 $("#buyclicker").click(function(){
   if(caes>=preco[0]) {

@@ -4,6 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../resources/js/jquery-3.3.1.min.js"></script>
+  <script src="resources/js/js.cookie.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Questrial|Roboto+Mono" rel="stylesheet">
 <script src="clicker.js"></script>
   <link rel="stylesheet" type="text/css" href="clicker.css">
@@ -22,7 +23,7 @@
           <h1 class="pulse animated infinite">Cãezinhos Clicker</h1><br>
           <span id="numero">VALOR QUE NÃO DEVIA DE APARECER</span>
         </div>
-        <div style="align-self: flex-end;"><a href="https://github.com/mikasonwar/Pagina-Pessoal/issues"><button>Sugestões</button></a><button id="teste">Teste Cookie</button></div>
+        <div style="align-self: flex-end;"><a href="https://github.com/mikasonwar/Pagina-Pessoal/issues"><button>Sugestões</button></a></div>
         <div><span>CPS: </span><span id="cps"></span></div>
         <div class="separador"></div>
 
@@ -43,12 +44,21 @@
           <span id="stock1">Posse</span>
           <div class="separadorvertical"></div>
           <button id="upgrade1">Upgrade</button>
-          <span id="priceup1">MoneisUpgradre</span>
+          <span id="priceup1">MoneisUpgrade</span>
           <span id="lvl1">lvl upgrade</span>
+        </div>
+
+        <div>
+          <button id="salvar" style="float: right;">Salvar</button>
+          <button id="apagar" style="float: right;">Apagar</button>
         </div>
       </div>
     </div>
   </div>
+
+        <div class="alert">
+          O seu progresso foi salvo...
+        </div>
 
 
 
