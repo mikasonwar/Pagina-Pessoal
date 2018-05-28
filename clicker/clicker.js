@@ -7,13 +7,32 @@ if(Cookies.get('save')=='true') {
   var cps = Cookies.getJSON('cps');
   } else {
   var caes = 0;
-  var preco = [50,500];
-  var posse = [0,0];
-  var precoupg = [0,10000];
-  var upg = [1,0];
-  var cps = [1, 10];
+  var preco = [50,200,2000,5000,15000,50000,150000];
+  var posse = [0,0,0,0,0,0,0];
+  var precoupg = [0,1000,5000,10000,40000,120000,250000];
+  var upg = [1,0,0,0,0,0,0];
+  var cps = [1,5,20,100,500,1000,5000,15000];
   }
 
+function comprar(x) {
+  return function(){
+    if (caes>=preco[x]) {
+    caes-=preco[x];
+    preco[x]=Math.round(preco[x]*1.25);
+    posse[x]+=1;
+    } else {alert("Não tem dinheiro para tal ação")}
+  }
+}
+
+function upgrade(x) {
+  return function() {
+    if(caes>=precoupg[x]) {
+    caes-=precoupg[x];
+    precoupg[x]=Math.round(precoupg[x]*1.5);
+    upg[x]+=1;
+  } else {alert("Não tem dinheiro para tal ação")}
+  }
+}
 
 
 $(document).ready(function(){
@@ -30,7 +49,11 @@ $("#price1").html(preco[1]);
 $("#priceup1").html(precoupg[1]);
 Guardar(false);
 window.setInterval(function(){
-  caes+=resumir(1);
+  for(var x in preco) {
+    if(x!=0){
+      caes+=resumir(x);
+    }
+  }
   $("#numero").html(caes+" Cães");
 }, 1000);
 
@@ -39,18 +62,25 @@ function resumir(numero){
 }
 
 window.setInterval(function(){
-  //init
-  $("#numero").html(caes+" Cães");
-  $("#cps").html(posse[1]*(cps[1]*(upg[1]/2+1)));
-  //Clicker
-  $("#precoclicker").html(preco[0]);
-  $("#quantiaclicker").html(cps[0]*upg[0])
-  // 1
-  $("#price1").html(preco[1]);
-  $("#stock1").html(posse[1]);
-  $("#priceup1").html(precoupg[1]);
-  $("#lvl1").html(upg[1]);
+  for(var x in preco) {
+    if(x==0){
+      $("#precoclicker").html(preco[0]);
+      $("#quantiaclicker").html(cps[0]*upg[0]);
+    } else {
+        $("#price"+x).html(preco[x]);
+        $("#stock"+x).html(posse[x]);
+        $("#priceup"+x).html(precoupg[x]);
+        $("#lvl"+x).html(upg[x]);
 
+    }
+  }
+  var msg = 0;
+  for(var x in preco) {
+    if(x!=0){
+      msg+=resumir(x);
+    }
+  }
+  $("#cps").html(msg);
 }, 5)
 
 window.setInterval(function(){
@@ -95,22 +125,15 @@ $("#buyclicker").click(function(){
   } else {alert("Não tem dinheiro para tal ação")}
 });
 
+for (var x in preco) {
+  if(x!=0){document.getElementById ("buy"+x).addEventListener("click",comprar(x), false);}
+}
 
-$("#buy1").click(function() {
-  if (caes>=preco[1]) {
-    caes-=preco[1];
-    preco[1]=Math.round(preco[1]*1.25);
-    posse[1]+=1;
-  } else {alert("Não tem dinheiro para tal ação")}
-});
+for (var x in preco) {
+  if(x!=0){document.getElementById ("upgrade"+x).addEventListener("click",upgrade(x), false);}
+}
 
-$("#upgrade1").click(function(){
-  if(caes>=precoupg[1]) {
-    caes-=precoupg[1];
-    precoupg[1]=Math.round(precoupg[1]*1.5);
-    upg[1]+=1;
-  } else {alert("Não tem dinheiro para tal ação")}
-});
+
 
 
 $("#clicker").on("click", function(){

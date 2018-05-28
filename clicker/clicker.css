@@ -73,8 +73,9 @@ h1 {
 .contentor{
   flex: 1 100%;
   background-color: #8a491b;
-  padding: 20px;
+  padding: 20px 20px 20px 0px;
   border-radius: 10px;
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -87,8 +88,15 @@ h1 {
   background-color: #bb5b23;
 }
 
-.contentor > * {
+.contentor > span {
   margin:auto;
+}
+.contentor > div {
+  margin:auto;
+}
+
+.nome {
+  max-width: 100px;
 }
 
 
