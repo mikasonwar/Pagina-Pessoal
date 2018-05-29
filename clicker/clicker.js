@@ -14,12 +14,40 @@ if(Cookies.get('save')=='true') {
   var cps = [1,5,20,100,500,1000,5000,15000];
   }
 
+function resumir(numero){
+  return Math.round(posse[numero]*(cps[numero]*(upg[numero]/2+1)));
+}
+
+function atualizar() {
+   $("#numero").html(caes+" Cães");
+    for(var x in preco) {
+    if(x==0){
+      $("#precoclicker").html(preco[0]);
+      $("#quantiaclicker").html(cps[0]*upg[0]);
+    } else {
+        $("#price"+x).html(preco[x]);
+        $("#stock"+x).html(posse[x]);
+        $("#priceup"+x).html(precoupg[x]);
+        $("#lvl"+x).html(upg[x]);
+    }
+  }
+  var msg = 0;
+  for(var x in preco) {
+    if(x!=0){
+      msg+=resumir(x);
+    }
+  }
+  $("#cps").html(msg);
+
+}
+
 function comprar(x) {
   return function(){
     if (caes>=preco[x]) {
     caes-=preco[x];
     preco[x]=Math.round(preco[x]*1.25);
     posse[x]+=1;
+    atualizar();
     } else {alert("Não tem dinheiro para tal ação")}
   }
 }
@@ -30,6 +58,7 @@ function upgrade(x) {
     caes-=precoupg[x];
     precoupg[x]=Math.round(precoupg[x]*1.5);
     upg[x]+=1;
+    atualizar();
   } else {alert("Não tem dinheiro para tal ação")}
   }
 }
@@ -37,13 +66,7 @@ function upgrade(x) {
 
 $(document).ready(function(){
 
-//  alert(Cookies.get('caes'));
-//  alert(Cookies.get('preco').replace(/[\[\]]/g, '').split(","));
-//  alert(Cookies.get('posse').replace(/[\[\]]/g, '').split(","));
-//  alert(Cookies.get('precoupg').replace(/[\[\]]/g, '').split(","));
-//  alert(Cookies.get('upg').replace(/[\[\]]/g, '').split(","));
-//  alert(Cookies.get('cps').replace(/[\[\]]/g, '').split(","));
-
+atualizar();
 $("#numero").html(caes+" Cães");
 $("#price1").html(preco[1]);
 $("#priceup1").html(precoupg[1]);
@@ -57,31 +80,11 @@ window.setInterval(function(){
   $("#numero").html(caes+" Cães");
 }, 1000);
 
-function resumir(numero){
-  return Math.round(posse[numero]*(cps[numero]*(upg[numero]/2+1)));
-}
+
 
 window.setInterval(function(){
-  for(var x in preco) {
-    if(x==0){
-      $("#precoclicker").html(preco[0]);
-      $("#quantiaclicker").html(cps[0]*upg[0]);
-    } else {
-        $("#price"+x).html(preco[x]);
-        $("#stock"+x).html(posse[x]);
-        $("#priceup"+x).html(precoupg[x]);
-        $("#lvl"+x).html(upg[x]);
-
-    }
-  }
-  var msg = 0;
-  for(var x in preco) {
-    if(x!=0){
-      msg+=resumir(x);
-    }
-  }
-  $("#cps").html(msg);
-}, 5)
+ atualizar();
+}, 10000)
 
 window.setInterval(function(){
   Guardar(true);
@@ -122,6 +125,7 @@ $("#buyclicker").click(function(){
     caes-=preco[0];
     preco[0]=Math.round(preco[0]*1.1);
     upg[0]+=1;
+    atualizar();
   } else {alert("Não tem dinheiro para tal ação")}
 });
 
@@ -138,7 +142,7 @@ for (var x in preco) {
 
 $("#clicker").on("click", function(){
   caes+=cps[0]*upg[0];
-  $("#numero").html(caes+" Cães");
+  atualizar();
 });
 
 });
