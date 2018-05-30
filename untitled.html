@@ -1,0 +1,296 @@
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.js"></script>
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+
+
+      <script type="text/javascript" src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
+
+
+
+      <link rel="stylesheet" type="text/css" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css">
+
+
+
+  <style type="text/css">
+
+  </style>
+
+  <title>Client Side Image Op Upload by Tatarize</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(window).load(function(){
+
+var crop_max_width = 400;
+var crop_max_height = 400;
+var jcrop_api;
+var canvas;
+var context;
+var image;
+
+var prefsize;
+
+$("#file").change(function() {
+  loadImage(this);
+});
+
+function loadImage(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    canvas = null;
+    reader.onload = function(e) {
+      image = new Image();
+      image.onload = validateImage;
+      image.src = e.target.result;
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function dataURLtoBlob(dataURL) {
+  var BASE64_MARKER = ';base64,';
+  if (dataURL.indexOf(BASE64_MARKER) == -1) {
+    var parts = dataURL.split(',');
+    var contentType = parts[0].split(':')[1];
+    var raw = decodeURIComponent(parts[1]);
+
+    return new Blob([raw], {
+      type: contentType
+    });
+  }
+  var parts = dataURL.split(BASE64_MARKER);
+  var contentType = parts[0].split(':')[1];
+  var raw = window.atob(parts[1]);
+  var rawLength = raw.length;
+  var uInt8Array = new Uint8Array(rawLength);
+  for (var i = 0; i < rawLength; ++i) {
+    uInt8Array[i] = raw.charCodeAt(i);
+  }
+
+  return new Blob([uInt8Array], {
+    type: contentType
+  });
+}
+
+function validateImage() {
+  if (canvas != null) {
+    image = new Image();
+    image.onload = restartJcrop;
+    image.src = canvas.toDataURL('image/png');
+  } else restartJcrop();
+}
+
+function restartJcrop() {
+  if (jcrop_api != null) {
+    jcrop_api.destroy();
+  }
+  $("#views").empty();
+  $("#views").append("<canvas id=\"canvas\">");
+  canvas = $("#canvas")[0];
+  context = canvas.getContext("2d");
+  canvas.width = image.width;
+  canvas.height = image.height;
+  context.drawImage(image, 0, 0);
+  $("#canvas").Jcrop({
+    onSelect: selectcanvas,
+    onRelease: clearcanvas,
+    boxWidth: crop_max_width,
+    boxHeight: crop_max_height
+  }, function() {
+    jcrop_api = this;
+  });
+  clearcanvas();
+}
+
+function clearcanvas() {
+  prefsize = {
+    x: 0,
+    y: 0,
+    w: canvas.width,
+    h: canvas.height,
+  };
+}
+
+function selectcanvas(coords) {
+  prefsize = {
+    x: Math.round(coords.x),
+    y: Math.round(coords.y),
+    w: Math.round(coords.w),
+    h: Math.round(coords.h)
+  };
+}
+
+function applyCrop() {
+  canvas.width = prefsize.w;
+  canvas.height = prefsize.h;
+  context.drawImage(image, prefsize.x, prefsize.y, prefsize.w, prefsize.h, 0, 0, canvas.width, canvas.height);
+  validateImage();
+}
+
+function applyScale(scale) {
+  if (scale == 1) return;
+  canvas.width = canvas.width * scale;
+  canvas.height = canvas.height * scale;
+  context.drawImage(image, 0, 0, canvas.width, canvas.height);
+  validateImage();
+}
+
+function applyRotate() {
+  canvas.width = image.height;
+  canvas.height = image.width;
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.translate(image.height / 2, image.width / 2);
+  context.rotate(Math.PI / 2);
+  context.drawImage(image, -image.width / 2, -image.height / 2);
+  validateImage();
+}
+
+function applyHflip() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.translate(image.width, 0);
+  context.scale(-1, 1);
+  context.drawImage(image, 0, 0);
+  validateImage();
+}
+
+function applyVflip() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.translate(0, image.height);
+  context.scale(1, -1);
+  context.drawImage(image, 0, 0);
+  validateImage();
+}
+
+$("#cropbutton").click(function(e) {
+  applyCrop();
+});
+$("#scalebutton").click(function(e) {
+  var scale = prompt("Scale Factor:", "1");
+  applyScale(scale);
+});
+$("#rotatebutton").click(function(e) {
+  applyRotate();
+});
+$("#hflipbutton").click(function(e) {
+  applyHflip();
+});
+$("#vflipbutton").click(function(e) {
+  applyVflip();
+});
+
+$("#form").submit(function(e) {
+  e.preventDefault();
+  formData = new FormData($(this)[0]);
+  var blob = dataURLtoBlob(canvas.toDataURL('image/png'));
+  //---Add file blob to the form data
+  formData.append("cropped_image[]", blob);
+  $.ajax({
+    url: "whatever.php",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    cache: false,
+    processData: false,
+    success: function(data) {
+      alert("Success");
+    },
+    error: function(data) {
+      alert("Error");
+    },
+    complete: function(data) {}
+  });
+});
+
+
+});
+
+
+
+
+</script>
+
+
+</head>
+
+<body style="">
+  <form id="form">
+  <h1>Client-side image-editor and uploader</h1>
+  <h2>Image file select</h2>
+  <input id="file" type="file">
+  <h2>Image cropper (Jcrop)</h2>
+  <button id="cropbutton" type="button">Crop</button>
+  <button id="scalebutton" type="button">Scale</button>
+  <button id="rotatebutton" type="button">Rotate</button>
+  <button id="hflipbutton" type="button">H-flip</button>
+  <button id="vflipbutton" type="button">V-flip</button>
+  <br>
+  <div id="views"><div class="jcrop-holder" style="width: 250px; height: 250px; position: relative; background-color: black;"><div style="position: absolute; z-index: 600;"><div style="width: 100%; height: 100%; z-index: 310; position: absolute; overflow: hidden;"><div class="jcrop-hline" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-hline bottom" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-vline right" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-vline" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-tracker" style="position: absolute; z-index: 360; cursor: move;"></div></div><div style="width: 100%; height: 100%; z-index: 320; display: none;"><div class="ord-n jcrop-dragbar" style="cursor: n-resize; position: absolute; z-index: 370;"></div><div class="ord-s jcrop-dragbar" style="cursor: s-resize; position: absolute; z-index: 371;"></div><div class="ord-e jcrop-dragbar" style="cursor: e-resize; position: absolute; z-index: 372;"></div><div class="ord-w jcrop-dragbar" style="cursor: w-resize; position: absolute; z-index: 373;"></div><div class="ord-n jcrop-handle" style="cursor: n-resize; position: absolute; z-index: 374; opacity: 0.5;"></div><div class="ord-s jcrop-handle" style="cursor: s-resize; position: absolute; z-index: 375; opacity: 0.5;"></div><div class="ord-e jcrop-handle" style="cursor: e-resize; position: absolute; z-index: 376; opacity: 0.5;"></div><div class="ord-w jcrop-handle" style="cursor: w-resize; position: absolute; z-index: 377; opacity: 0.5;"></div><div class="ord-nw jcrop-handle" style="cursor: nw-resize; position: absolute; z-index: 378; opacity: 0.5;"></div><div class="ord-ne jcrop-handle" style="cursor: ne-resize; position: absolute; z-index: 379; opacity: 0.5;"></div><div class="ord-se jcrop-handle" style="cursor: se-resize; position: absolute; z-index: 380; opacity: 0.5;"></div><div class="ord-sw jcrop-handle" style="cursor: sw-resize; position: absolute; z-index: 381; opacity: 0.5;"></div></div></div><div class="jcrop-tracker" style="width: 254px; height: 254px; position: absolute; top: -2px; left: -2px; z-index: 290; cursor: crosshair;"></div><input type="radio" class="jcrop-keymgr" style="position: fixed; left: -120px; width: 12px;"><div style="position: absolute; z-index: 240; opacity: 0;"><div style="position: absolute; left: 0px; width: 0px; height: 0px; background-color: black;"></div><div style="position: absolute; height: 250px; width: 0px; background-color: black;"></div><div style="position: absolute; height: 250px; left: 0px; width: 250px; background-color: black;"></div><div style="position: absolute; top: 0px; left: 0px; width: 0px; height: 250px; background-color: black;"></div></div><canvas id="canvas" width="250" height="250" style="display: block; border: none; visibility: visible; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; width: 250px; height: 250px;"></canvas></div></div>
+  <h2>Submit form</h2>
+  <input type="submit" value="Upload form data and image">
+</form>
+
+
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "w1Lh4w2t"
+    }], "*")
+  }
+</script>
+
+
+
+
+
+</body></html>
