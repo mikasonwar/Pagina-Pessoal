@@ -56,3 +56,36 @@ $(document).ready(function(){
   });
 });
 
+// Image Manipulation
+
+// target for jcrop image
+// photograph fileupload control
+// preview canvas preview
+// clear_selection button the clear the selected area
+
+// var jcrop_api;
+// var canvas;
+// var context;
+// var image;
+// var prefsize;
+
+// function readURL(input) {
+
+//     if (input.files && input.files[0]) {
+//         var reader = new FileReader();
+//         reader.onload = function (e) {
+//             $('#target').attr('src', e.target.result);
+//             setProperties();
+//         }
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// }
+
+//  function setProperties(){
+//    $('#target').Jcrop({
+//               setSelect: [0,0,240,320]
+//         });
+//  }
+//  $("#photograph").change(function(){
+//     readURL(this);
+//   });

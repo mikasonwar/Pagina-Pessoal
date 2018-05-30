@@ -46,6 +46,14 @@ body {
   background-color: red;
 }
 
+.imgtest {
+  outline: solid;
+  outline-width: 2px;
+  outline-color: black;
+  width: 200px;
+  height: 200px;
+}
+
 .containerexperiencia {
   display: flex;
   flex-direction: row;

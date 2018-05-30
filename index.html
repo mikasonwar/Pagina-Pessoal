@@ -4,8 +4,13 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="resources/js/jquery-3.3.1.min.js"></script>
+<!--   <script src="resources/js/jquery.Jcrop.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="resources/css/jquery.Jcrop.css"> -->
+  <script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
+  <link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Questrial|Roboto+Mono" rel="stylesheet">
 <script src="index.js"></script>
+<script src="resources/js/imagemmanip.js"></script>
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="icon" href="resources/images/letter-m.png">
   <title>Miguel Pereira</title>
@@ -281,8 +286,29 @@
             <div class="conteudoteste">
               <a href="clicker/clicker.html" class="ulinks" style="font-size: 20px;">Ir até página</a>
             </div>
-          Testezão
-            <div class="conteudoteste">Ei cá cena</div>
+          Input
+          <div class="conteudoteste">
+            Teste
+            <div class="imgtest">
+              <img src="resources/images/bg.jpg" width="200" height="200" id="target">
+            </div><br>
+            <script async src="//jsfiddle.net/w1Lh4w2t/embed/js,html,css,result/dark/"></script>
+          <form id="form">
+            <h1>Client-side image-editor and uploader</h1>
+            <h2>Image file select</h2>
+            <input id="file" type="file" />
+            <h2>Image cropper (Jcrop)</h2>
+            <button id="cropbutton" type="button">Crop</button>
+            <button id="scalebutton" type="button">Scale</button>
+            <button id="rotatebutton" type="button">Rotate</button>
+            <button id="hflipbutton" type="button">H-flip</button>
+            <button id="vflipbutton" type="button">V-flip</button>
+            <br>
+            <div id="views"></div>
+            <h2>Submit form</h2>
+            <input type="submit" value="Upload form data and image" />
+          </form>
+          </div>
 
         </div>
 
