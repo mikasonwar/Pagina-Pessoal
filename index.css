@@ -18,7 +18,7 @@ body {
   .principal{width:90% !important;}
   .experiencia{flex: 1 100% !important;}
   .containerexperiencia{flex-direction: column !important;}
-  .descricao {overflow: scroll;}
+  .descricao {overflow-y: scroll;overflow-x:hidden;}
   .galeria {align-content: center;}
   .avatar {border-style: none !important;}
 }
@@ -97,6 +97,7 @@ body {
     bottom: 0;
     padding: 10px;
     overflow-y:scroll;
+    overflow-x:hidden;
     left:0%;
     padding-left: 15%;
     padding-right: 100%;
@@ -299,6 +300,7 @@ body {
     text-align: left;
     color: white;
     overflow-y:scroll;
+    overflow-x:hidden;
 }
 
 .hidden{
