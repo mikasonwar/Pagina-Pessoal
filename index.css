@@ -18,6 +18,9 @@ body {
   .principal{width:90% !important;}
   .experiencia{flex: 1 100% !important;}
   .containerexperiencia{flex-direction: column !important;}
+  .descricao {overflow: scroll;}
+  .galeria {align-content: center;}
+  .avatar {border-style: none !important;}
 }
  @media screen and (max-width: 500px){
   .links > a {margin-right: 5px !important;}
@@ -46,14 +49,66 @@ body {
   background-color: red;
 }
 
-.imgtest {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: black;
-  width: 200px;
-  height: 200px;
+.galeria > * {
+  /*margin:auto;*/
+
 }
 
+.imgtest {
+  display: flex;
+  align-items: center;
+  /*min-height: 50px;*/
+  max-width: 650px;
+  max-height: 100px;
+  border-radius: 30%;
+  position: relative;
+  overflow: hidden;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+/*  margin:auto;*/
+  margin-top:10px;
+  margin-right: 10px
+}
+
+.imgtest > img {
+    position: absolute;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+.imgtest:hover {
+  box-shadow: 0px 1px 20px 0px;
+}
+.galeria {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.descricao {
+    display: none;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    width: 70%;
+    position: absolute;
+    max-height: 90%;
+    background-color: rgba(74, 72, 72, 0.85);
+    bottom: 0;
+    padding: 10px;
+    overflow-y:scroll;
+    left:0%;
+    padding-left: 15%;
+    padding-right: 100%;
+}
+
+.desctitulo {
+      font-weight: bold;
+}
+
+.desc {
+  font-size: 11px;
+}
 .containerexperiencia {
   display: flex;
   flex-direction: row;
@@ -73,7 +128,6 @@ body {
   padding: 10px;
   width: 90%;
   margin:auto;
-  margin-top: 5px;
   background-color: gray;
 }
 
@@ -214,13 +268,37 @@ body {
   margin: 5px;
 }
 
+.avatar:hover {
+  box-shadow: 0px 1px 20px 0px;
+}
+
 .avatar {
+  position: relative;
   border-radius: 90px;
   margin:auto;
   margin-bottom: 5px;
   width: 400px;
   max-width: 100%;
   max-height: 250px;
+  overflow: hidden;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+
+}
+
+.avatar > span {
+    display: none;
+    position: absolute;
+    background-color: rgba(74, 72, 72, 0.85);
+    width: 100%;
+    max-height: 50%;
+    bottom: 0;
+    left:0;
+    padding: 1% 900% 2% 20%;
+    text-align: left;
+    color: white;
+    overflow-y:scroll;
 }
 
 .hidden{

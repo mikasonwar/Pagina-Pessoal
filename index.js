@@ -30,6 +30,7 @@ $(document).ready(function(){
 
   $("#Testes").on("click", function(){
     $(".containertestes").show();
+    imagens();
   });
 
   $("#videojogos").on("click",function(){
@@ -54,38 +55,67 @@ $(document).ready(function(){
   $(".csshidden").on("click", function(){
     $(".Jquery").slideToggle();
   });
+
+  $(".imgtest").on("mouseenter mouseleave", function(){
+    $(this).find(".descricao").slideToggle();
+  });
+
+  $(".avatar").on("mouseenter mouseleave", function(){
+    $(this).find("span:eq(0)").slideToggle();
+  });
+
+  window.addEventListener("load", function() {
+  var elements = document.getElementsByClassName("rainbowText");
+  for (let i = 0; i < elements.length; i++) {
+    generateRainbowText(elements[i]);
+  }
 });
 
-// Image Manipulation
+function generateRainbowText(element) {
+  var text = element.innerText;
+  element.innerHTML = "";
+  for (let i = 0; i < text.length; i++) {
+    let charElem = document.createElement("span");
+    charElem.style.color = "hsl(" + (360 * i / text.length) + ",80%,50%)";
+    charElem.innerHTML = text[i];
+    element.appendChild(charElem);
+  }
+}
 
-// target for jcrop image
-// photograph fileupload control
-// preview canvas preview
-// clear_selection button the clear the selected area
+  // avatar();
 
-// var jcrop_api;
-// var canvas;
-// var context;
-// var image;
-// var prefsize;
 
-// function readURL(input) {
 
-//     if (input.files && input.files[0]) {
-//         var reader = new FileReader();
-//         reader.onload = function (e) {
-//             $('#target').attr('src', e.target.result);
-//             setProperties();
-//         }
-//         reader.readAsDataURL(input.files[0]);
+
+});
+
+$(window).resize(function(){
+  // avatar();
+  imagens();
+});
+
+function imagens() {
+  $(".imgtest").each(function(index){
+   var H = $(".imgtest").eq(index).find("img").height();
+   var W = $(".imgtest").eq(index).find("img").width();
+    $(".imgtest").eq(index).height(H).width(W);
+  });
+}
+
+function avatar() {
+  var Ha = $(".avatar").find("img").height();
+  var Wa = $(".avatar").find("img").width();
+  $(".avatar").height(Ha).width(Wa);
+}
+
+// function organizar() {
+//   var W = $(".galeria").width();
+//   $(".imgtest").each(function(index){
+//     if(index==0) {
+//       $(".imgtest").eq(0).css("order", 1);
+//     } else {
+//         if($(".ingtest").eq(index).width()+14<=somar())
 //     }
-// }
 
-//  function setProperties(){
-//    $('#target').Jcrop({
-//               setSelect: [0,0,240,320]
-//         });
-//  }
-//  $("#photograph").change(function(){
-//     readURL(this);
 //   });
+// }

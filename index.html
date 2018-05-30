@@ -4,24 +4,25 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="resources/js/jquery-3.3.1.min.js"></script>
-<!--   <script src="resources/js/jquery.Jcrop.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="resources/css/jquery.Jcrop.css"> -->
-  <script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
-  <link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Questrial|Roboto+Mono" rel="stylesheet">
 <script src="index.js"></script>
-<script src="resources/js/imagemmanip.js"></script>
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="icon" href="resources/images/letter-m.png">
   <title>Miguel Pereira</title>
 </head>
-<body>
+<body onresize="imagens()">
 
 <div class="container">
   <div class="principal">
     <div class="containerinterior">
         <div class="header">
-           <img src="resources/images/avatar.jpg" class="avatar"><br>
+          <div class="avatar">
+           <img src="resources/images/avatar.jpg" style="width: 100%;height: 100%;">
+              <span>
+                <span class="rainbowText"><b>Mikasonwar</b></span><br>21/08/2000 - 17<br>
+              </span></img>
+            </div>
+            <br>
            <span class="hnome">Miguel <span class="alcunha">"Mikas"</span> Pereira</span>
         </div>
         <div class="tabs">
@@ -282,37 +283,95 @@
         </div>
 
         <div class="containertestes tabmanager" style="display: none;">
-          Cãezinhos Clicker versão web
+          <h3>Cãezinhos Clicker versão web</h3>
             <div class="conteudoteste">
               <a href="clicker/clicker.html" class="ulinks" style="font-size: 20px;">Ir até página</a>
             </div>
-          Input
+          <h3>Imagens</h3>
           <div class="conteudoteste">
             Teste
-            <div class="imgtest">
-              <img src="resources/images/bg.jpg" width="200" height="200" id="target">
-            </div><br>
-            <script async src="//jsfiddle.net/w1Lh4w2t/embed/js,html,css,result/dark/"></script>
-          <form id="form">
-            <h1>Client-side image-editor and uploader</h1>
-            <h2>Image file select</h2>
-            <input id="file" type="file" />
-            <h2>Image cropper (Jcrop)</h2>
-            <button id="cropbutton" type="button">Crop</button>
-            <button id="scalebutton" type="button">Scale</button>
-            <button id="rotatebutton" type="button">Rotate</button>
-            <button id="hflipbutton" type="button">H-flip</button>
-            <button id="vflipbutton" type="button">V-flip</button>
-            <br>
-            <div id="views"></div>
-            <h2>Submit form</h2>
-            <input type="submit" value="Upload form data and image" />
-          </form>
-          </div>
+            <div class="galeria">
+              <div class="imgtest">
+                <img src="resources/images/bg.jpg" id="target">
+                <div class="descricao">
+                  <span class="desctitulo">Teste</span><br>
+                  <span class="desc">Opá uma coisa aqui grande para ocupar espaço e conseguir fazer debug entendes? opá estou a falar com um website fogo assério não acredito nisto acontece-me sempre a mesma coisa, é todos os dias fogo acho que o website está a ficar com problemas mentais... ou serei eu?</span>
+                </div>
+              </div>
 
-          <div class="conteudoteste">
+              <div class="imgtest">
+                <img src="resources/images/python.png">
+                <span class="descricao">
+                  <span class="desctitulo">Mais um Teste</span><br>
+                  <span class="desc">Ganda cena ó mano</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="resources/images/avatar.jpg">
+                <span class="descricao">
+                  <span class="desctitulo">Teste</span><br>
+                  <span class="desc">Opá uma coisa aqui grande para ocupar espaço e conseguir fazer debug entendes?</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="resources/images/lusoroleplay2.jpg">
+                <span class="descricao">
+                  <span class="desctitulo">Testeee</span><br>
+                  <span class="desc">Ganda testezão</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="resources/images/bg2.jpg">
+                <span class="descricao">
+                  <span class="desctitulo">Testeee</span><br>
+                  <span class="desc">Ganda testezão</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="resources/images/gamepad.png">
+                <span class="descricao">
+                  <span class="desctitulo">Testeee</span><br>
+                  <span class="desc">Ganda testezão</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="clicker/resources/images/bg.png">
+                <span class="descricao">
+                  <span class="desctitulo">Testeee</span><br>
+                  <span class="desc">Ganda testezão</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="resources/images/fernando_mendes.jpg">
+                <span class="descricao">
+                  <span class="desctitulo">Testeee</span><br>
+                  <span class="desc">Ganda testezão</span>
+                </span>
+              </div>
+
+              <div class="imgtest">
+                <img src="resources/images/fernando_mendes2.jpeg">
+                <span class="descricao">
+                  <span class="desctitulo">Testeee</span><br>
+                  <span class="desc">Ganda testezão</span>
+                </span>
+              </div>
+
+
+
+            </div>
 
           </div>
+        <h3>Website de editar fotografias que é bery nice</h3>
+         <div class="conteudoteste">
+          <a href="https://fengyuanchen.github.io/photo-editor/" class="ulinks">Ir até página</a>
+         </div>
         </div>
 
         <div class="espacolinks"></div>
