@@ -33,6 +33,11 @@ $(document).ready(function(){
     imagens();
   });
 
+  $("#Galeria").on("click", function(){
+    $(".containergaleria").show();
+    imagens();
+  });
+
   $("#videojogos").on("click",function(){
     $("#cvideojogos").slideToggle();
   });
@@ -82,7 +87,7 @@ function generateRainbowText(element) {
   }
 }
 
-  // avatar();
+
 
 
 
@@ -90,7 +95,6 @@ function generateRainbowText(element) {
 });
 
 $(window).resize(function(){
-  // avatar();
   imagens();
 });
 
