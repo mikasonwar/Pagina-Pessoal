@@ -1,0 +1,63 @@
+body {
+  background-color: rgb(200, 245, 183);
+}
+
+.container {
+  border-radius: 10px;
+  background-color: rgba(0, 128, 0, 0.47);
+  width: 800px
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin:auto;
+  padding:20px;
+}
+
+.teste {
+  background-color: green !important;
+}
+
+table {
+  width: 100%;
+  /*outline: 2px solid brown;*/
+  border-spacing: 0px;
+}
+
+table td {
+  width: 10%;
+  height: 50px;
+}
+
+.highlight {
+  background-color: rgb(255, 166, 34) !important;
+}
+
+.jogo {
+  outline:2px solid rgb(105, 57, 9);
+  background-color: white;
+  max-width: 700px;
+  margin:auto;
+}
+
+.preto {
+  background-color: rgb(130, 75, 27);
+}
+
+.dama{
+  border-radius: 100%;
+  margin:auto;
+  width: 90%;
+  height: 90%;
+}
+
+.amarela{
+  background-color: yellow;
+}
+
+.vermelha{
+  background-color: red;
+}
+
+.branco {
+
+}
