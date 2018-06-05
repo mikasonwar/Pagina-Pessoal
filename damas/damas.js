@@ -67,17 +67,17 @@ function zEscolher(elemento,cor){
   if(cor==0) {
       if(elemento.find("div").hasClass('amarela')) {console.log("[Y]tá funcionar sócio "+zDescobrirIndex(elemento));}
         else if(elemento.find('div').hasClass('vermelha')) {
-          if(zDescobrirIndex($(".DJ").parent("td"))-zDescobrirIndex(elemento)==9) {
-            if($("td").eq(zDescobrirIndex(elemento)-9).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaD'))
+          if(zDescobrirIndex($(".DJ").parent("td"))-zDescobrirIndex(elemento)==7) {
+            if($("td").eq(zDescobrirIndex(elemento)-7).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaD'))
               {console.log("[Y] zEscolher bordaD");}
+            else {$("td").eq(zDescobrirIndex(elemento)-7).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
+          }
+          else if(zDescobrirIndex($(".DJ").parent("td"))-zDescobrirIndex(elemento)==9){
+            if($("td").eq(zDescobrirIndex(elemento)-9).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaE'))
+              {console.log("[Y] zEscolher bordaE");}
             else {$("td").eq(zDescobrirIndex(elemento)-9).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
           }
-          else if(zDescobrirIndex($(".DJ").parent("td"))-zDescobrirIndex(elemento)==11){
-            if($("td").eq(zDescobrirIndex(elemento)-11).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaE'))
-              {console.log("[Y] zEscolher bordaE");}
-            else {$("td").eq(zDescobrirIndex(elemento)-11).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
-          }
-          else {zDebug([zDescobrirIndex(elemento),zDescobrirIndex($(".DJ").parent("td")),zDescobrirIndex(elemento)-11])}
+          else {zDebug([zDescobrirIndex(elemento),zDescobrirIndex($(".DJ").parent("td")),zDescobrirIndex(elemento)-9])}
         }
         else {
           elemento.toggleClass('highlight');
@@ -89,17 +89,17 @@ function zEscolher(elemento,cor){
   else if(cor==1) {
       if(elemento.find("div").hasClass('vermelha')) {console.log("[R]tá funcionar sócio "+zDescobrirIndex(elemento));}
         else if(elemento.find('div').hasClass('amarela')) {
-          if(zDescobrirIndex(elemento)-zDescobrirIndex($(".DJ").parent("td"))==9) {
-            if($("td").eq(zDescobrirIndex(elemento)+9).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaE'))
+          if(zDescobrirIndex(elemento)-zDescobrirIndex($(".DJ").parent("td"))==7) {
+            if($("td").eq(zDescobrirIndex(elemento)+7).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaE'))
               {console.log("[R] zEscolher bordaD");}
+            else {$("td").eq(zDescobrirIndex(elemento)+7).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
+          }
+          else if(zDescobrirIndex(elemento)-zDescobrirIndex($(".DJ").parent("td"))==9){
+            if($("td").eq(zDescobrirIndex(elemento)+9).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaD'))
+              {console.log("[R] zEscolher bordaE");}
             else {$("td").eq(zDescobrirIndex(elemento)+9).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
           }
-          else if(zDescobrirIndex(elemento)-zDescobrirIndex($(".DJ").parent("td"))==11){
-            if($("td").eq(zDescobrirIndex(elemento)+11).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaD'))
-              {console.log("[R] zEscolher bordaE");}
-            else {$("td").eq(zDescobrirIndex(elemento)+11).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
-          }
-          else {zDebug([zDescobrirIndex(elemento),zDescobrirIndex($(".DJ").parent("td")),zDescobrirIndex(elemento)+11])}
+          else {zDebug([zDescobrirIndex(elemento),zDescobrirIndex($(".DJ").parent("td")),zDescobrirIndex(elemento)+9])}
         }
         else {
           elemento.toggleClass('highlight');
@@ -115,7 +115,7 @@ function zEscolher(elemento,cor){
 }
 
 function zDescobrirIndex(elemento) {
-  return (elemento.parent("tr").index()*10)+elemento.index();
+  return (elemento.parent("tr").index()*8)+elemento.index();
 }
 
 function zEscolherDama() {
@@ -132,8 +132,8 @@ function zEscolherDama() {
     else {
       $(".highlight").removeClass("highlight");
       var z = zDescobrirIndex($(this).parent("td"));
-      var direita = $("td").eq(z-9);
-      var esquerda = $("td").eq(z-11);
+      var direita = $("td").eq(z-7);
+      var esquerda = $("td").eq(z-9);
       // $(this).parent("td").toggleClass("highlight");
       $(".PK").unbind('click', zKill).removeClass('PK');
       $(".PP").unbind("click",zJogar).removeClass("PP");
@@ -164,8 +164,8 @@ function zEscolherDama() {
       else {
         $(".highlight").removeClass("highlight");
         var z = zDescobrirIndex($(this).parent("td"));
-        var esquerda = $("td").eq(z+9);
-        var direita = $("td").eq(z+11);
+        var esquerda = $("td").eq(z+7);
+        var direita = $("td").eq(z+9);
         // $(this).parent("td").toggleClass("highlight");
         $(".PK").unbind('click', zKill).removeClass('PK');
         $(".PP").unbind("click",zJogar).removeClass("PP");
@@ -201,7 +201,7 @@ function zDebug(Arr) {
 function zLinhaX() {
   var linhax = document.createElement("tr");
   var x = "<td></td><td class='preto'></td>";
-  var y = x + x + x + x + x;
+  var y = x + x + x + x;
   linhax.innerHTML=y;
   $(linhax).appendTo("table");
 }
@@ -209,24 +209,24 @@ function zLinhaX() {
 function zLinhaY() {
   var linhay = document.createElement("tr");
   var x = "<td class='preto'></td><td></td>";
-  var y = x + x + x + x + x;
+  var y = x + x + x + x;
   linhay.innerHTML=y;
   $(linhay).appendTo("table");
 }
 
 function zXadrex() {
-  for(i=0;i<5;i++) {
+  for(i=0;i<4;i++) {
     zLinhaX();
     zLinhaY();
   }
 }
 
 function zPopular() {
-  for(i=0;i<20;i++) {
+  for(i=0;i<12;i++) {
     $(".preto").eq(i).append("<div class='dama vermelha'></div>");
   }
 
-  for(i=30;i<50;i++) {
+  for(i=20;i<32;i++) {
     $(".preto").eq(i).append("<div class='dama amarela'></div>");
   }
 }
