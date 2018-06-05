@@ -1,3 +1,13 @@
+/*
+font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Questrial', sans-serif;
+*/
+
+@media screen and (max-width: 600px) {
+
+}
+
 body {
   background-color: rgb(200, 245, 183);
 }
@@ -5,16 +15,21 @@ body {
 .container {
   border-radius: 10px;
   background-color: rgba(0, 128, 0, 0.47);
-  width: 800px
-  display: flex;
+  flex-direction: column;
   align-content: center;
   align-items: center;
+  width: 80%;
   margin:auto;
   padding:20px;
+  padding-bottom: 50px;
 }
 
 .teste {
   background-color: green !important;
+}
+
+.PK {
+  background-color: #cc2121 !important;
 }
 
 table {
@@ -28,6 +43,10 @@ table td {
   height: 50px;
 }
 
+.DJ {
+  border:2px solid black;
+}
+
 .highlight {
   background-color: rgb(255, 166, 34) !important;
 }
@@ -35,7 +54,8 @@ table td {
 .jogo {
   outline:2px solid rgb(105, 57, 9);
   background-color: white;
-  max-width: 700px;
+  width: 100%;
+  max-width: 600px;
   margin:auto;
 }
 
@@ -46,12 +66,32 @@ table td {
 .dama{
   border-radius: 100%;
   margin:auto;
-  width: 90%;
-  height: 90%;
+  width: 80%;
+  height: 80%;
+  box-shadow: 1px 2px black;
 }
 
 .amarela{
   background-color: yellow;
+}
+
+.h1 {
+  background-color: rgb(136, 67, 26);
+  border-radius: 10px;
+  font-family: 'Questrial', sans-serif;
+  font-size: 4em;
+  padding:10px;
+  margin-bottom: 20px;
+}
+
+.y{
+  text-align: center;
+  color: yellow;
+}
+
+.r{
+  text-align: center;
+  color: red;
 }
 
 .vermelha{

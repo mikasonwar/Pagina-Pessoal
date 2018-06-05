@@ -1,78 +1,193 @@
 var red=1;
 var yellow=0;
+var mikas = 0;
 $(document).ready(function(){
 zXadrex();
 zPopular();
 zBordas();
 
-$(".amarela").on("click", function(){
-  if($(this).parent("td").hasClass("highlight")){$(".highlight").removeClass("highlight")}
-  else {
-    $(".highlight").removeClass("highlight");
-    var z = ($(this).parent("td").parent("tr").index()*10)+$(this).parent("td").index();
-    var direita = $("td").eq(z-9);
-    var esquerda = $("td").eq(z-11);
-    $(this).parent("td").toggleClass("highlight");
+zLado();
 
 
-     if($("td").eq(z-10).hasClass("bordaE")) {
-        zEscolher(direita,yellow);
-      }
-      else if ($("td").eq(z-10).hasClass("bordaD")){
-        zEscolher(esquerda,yellow);
-        }
-    else {
-        zEscolher(esquerda,yellow);
-        zEscolher(direita,yellow);
-        }
+  $(".debugbutton").on("click", zBDebug);
+
+});
+
+function zLado(){
+  if(mikas==1)
+  {
+    $(".vermelha").unbind("click", zEscolherDama);
+    $(".h1").removeClass('r').addClass('y').text("Amarelo");
+    $(".amarela").bind("click", zEscolherDama);
+    mikas=0;
   }
-  });
-
-$(".vermelha").on("click", function(){
-if($(this).parent("td").hasClass("highlight")){$(".highlight").removeClass("highlight")}
-else {
-  $(".highlight").removeClass("highlight");
-  var z = ($(this).parent("td").parent("tr").index()*10)+$(this).parent("td").index();
-  var esquerda = $("td").eq(z+9);
-  var direita = $("td").eq(z+11);
-  $(this).parent("td").toggleClass("highlight");
-
-
-   if($("td").eq(z+10).hasClass("bordaE")) {
-      zEscolher(direita,red);
-    }
-    else if ($("td").eq(z+10).hasClass("bordaD")){
-      zEscolher(esquerda,red);
-      }
-  else {
-      zEscolher(esquerda,red);
-      zEscolher(direita,red);
-      }
+  else
+  {
+    $(".amarela").unbind("click", zEscolherDama);
+    $(".h1").removeClass('y').addClass('r').text("Vermelho");
+    $(".vermelha").bind("click", zEscolherDama);
+    mikas=1;
+  }
 }
-});
 
-});
+function zBDebug() {
+  var x = zDescobrirIndex($(".DJ").parent("td"));
+  var y = zDescobrirIndex($(".PP").eq(1));
+  zDebug([x,y,x-y]);
+}
 
 
 function zJogar(){
-
+  var DJ = $(".DJ");
+  $(".DJ").remove();
+  $(this).append(DJ);
+  $(".PK").unbind("click",zKill).removeClass('PK');
+  $(".PP").unbind("click",zJogar).removeClass('PP');
+  $(".DJ").on("click", zEscolherDama).removeClass('DJ');
+  $(".highlight").removeClass('highlight');
+  zLado();
 }
+
+function zKill(){
+  var DJ = $(".DJ");
+  $(".DJ").remove();
+  $(this).append(DJ);
+  $("td").eq($(this).attr('id')).find("div").remove();
+  $(".PK").unbind("click",zKill).removeClass('PK');
+  $(".PP").unbind("click",zJogar).removeClass('PP');
+  $(".DJ").on("click", zEscolherDama).removeClass('DJ');
+  $(".highlight").removeClass('highlight');
+  zLado();
+}
+
 
 function zEscolher(elemento,cor){
 
+// Amarelo
   if(cor==0) {
-      if(elemento.find("div").hasClass('amarela')) {console.log("[Y]tá funcionar sócio "+elemento.index());}
-        else {elemento.toggleClass('highlight');}
+      if(elemento.find("div").hasClass('amarela')) {console.log("[Y]tá funcionar sócio "+zDescobrirIndex(elemento));}
+        else if(elemento.find('div').hasClass('vermelha')) {
+          if(zDescobrirIndex($(".DJ").parent("td"))-zDescobrirIndex(elemento)==9) {
+            if($("td").eq(zDescobrirIndex(elemento)-9).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaD'))
+              {console.log("[Y] zEscolher bordaD");}
+            else {$("td").eq(zDescobrirIndex(elemento)-9).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
+          }
+          else if(zDescobrirIndex($(".DJ").parent("td"))-zDescobrirIndex(elemento)==11){
+            if($("td").eq(zDescobrirIndex(elemento)-11).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaE'))
+              {console.log("[Y] zEscolher bordaE");}
+            else {$("td").eq(zDescobrirIndex(elemento)-11).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
+          }
+          else {zDebug([zDescobrirIndex(elemento),zDescobrirIndex($(".DJ").parent("td")),zDescobrirIndex(elemento)-11])}
+        }
+        else {
+          elemento.toggleClass('highlight');
+          elemento.addClass("PP");
+          elemento.bind("click",zJogar);
+        }
   }
+// Vermelho
   else if(cor==1) {
-      if(elemento.find("div").hasClass('vermelha')) {console.log("[R]tá funcionar sócio "+elemento.index());}
-        else {elemento.toggleClass('highlight');}
+      if(elemento.find("div").hasClass('vermelha')) {console.log("[R]tá funcionar sócio "+zDescobrirIndex(elemento));}
+        else if(elemento.find('div').hasClass('amarela')) {
+          if(zDescobrirIndex(elemento)-zDescobrirIndex($(".DJ").parent("td"))==9) {
+            if($("td").eq(zDescobrirIndex(elemento)+9).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaE'))
+              {console.log("[R] zEscolher bordaD");}
+            else {$("td").eq(zDescobrirIndex(elemento)+9).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
+          }
+          else if(zDescobrirIndex(elemento)-zDescobrirIndex($(".DJ").parent("td"))==11){
+            if($("td").eq(zDescobrirIndex(elemento)+11).find("div").hasClass('dama') || $("td").eq(zDescobrirIndex(elemento)).hasClass('bordaD'))
+              {console.log("[R] zEscolher bordaE");}
+            else {$("td").eq(zDescobrirIndex(elemento)+11).toggleClass('PK').attr('id', zDescobrirIndex(elemento)).bind("click",zKill);}
+          }
+          else {zDebug([zDescobrirIndex(elemento),zDescobrirIndex($(".DJ").parent("td")),zDescobrirIndex(elemento)+11])}
+        }
+        else {
+          elemento.toggleClass('highlight');
+          elemento.addClass("PP");
+          elemento.bind("click",zJogar);
+        }
   }
+// Debug Erro
   else {
-    alert("Erro!");
+    alert("Erro! zEscolher");
   }
 
 }
+
+function zDescobrirIndex(elemento) {
+  return (elemento.parent("tr").index()*10)+elemento.index();
+}
+
+function zEscolherDama() {
+  if($(this).hasClass('amarela')) {
+    // ********************************************************************************************
+    //                                            Amarelo
+    // ********************************************************************************************
+      if($(this).hasClass("DJ")){
+        $(".highlight").removeClass("highlight");
+        $(this).removeClass("DJ");
+        $(".PP").removeClass('PP');
+        $(".PK").removeClass('PK');
+      }
+    else {
+      $(".highlight").removeClass("highlight");
+      var z = zDescobrirIndex($(this).parent("td"));
+      var direita = $("td").eq(z-9);
+      var esquerda = $("td").eq(z-11);
+      // $(this).parent("td").toggleClass("highlight");
+      $(".PK").unbind('click', zKill).removeClass('PK');
+      $(".PP").unbind("click",zJogar).removeClass("PP");
+      $(".DJ").removeClass("DJ");
+      var DJ = $(this);
+      $(this).addClass('DJ');
+
+       if($("td").eq(z-10).hasClass("bordaE")) {
+          zEscolher(direita,yellow);
+        }
+        else if ($("td").eq(z-10).hasClass("bordaD")){
+          zEscolher(esquerda,yellow);
+          }
+          else {
+              zEscolher(esquerda,yellow);
+              zEscolher(direita,yellow);
+              }
+    }
+  }
+  // ********************************************************************************************
+  // ********************************************************************************************
+
+  else if ($(this).hasClass('vermelha')) {
+    // ********************************************************************************************
+    //                                    Vermelho
+    // ********************************************************************************************
+    if($(this).hasClass("DJ")){$(".highlight").removeClass("highlight");$(this).removeClass("DJ");}
+      else {
+        $(".highlight").removeClass("highlight");
+        var z = zDescobrirIndex($(this).parent("td"));
+        var esquerda = $("td").eq(z+9);
+        var direita = $("td").eq(z+11);
+        // $(this).parent("td").toggleClass("highlight");
+        $(".PK").unbind('click', zKill).removeClass('PK');
+        $(".PP").unbind("click",zJogar).removeClass("PP");
+        $(".DJ").removeClass("DJ");
+        $(this).addClass('DJ');
+
+
+         if($("td").eq(z+10).hasClass("bordaE")) {
+            zEscolher(direita,red);
+          }
+          else if ($("td").eq(z+10).hasClass("bordaD")){
+            zEscolher(esquerda,red);
+            }
+            else {
+                zEscolher(esquerda,red);
+                zEscolher(direita,red);
+                }
+      }
+      // Debug Erro
+      } else {alert("alert zEscolherDama");}
+}
+
 
 function zDebug(Arr) {
   var msg="";
