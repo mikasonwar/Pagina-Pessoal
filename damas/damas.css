@@ -84,6 +84,12 @@ table td {
   margin-bottom: 20px;
 }
 
+.rainha {
+  background-image: url(crown.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 .y{
   text-align: center;
   color: yellow;

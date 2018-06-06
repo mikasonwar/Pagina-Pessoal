@@ -3,6 +3,8 @@ var yellow=0;
 var mikas = 0;
 var tracking=0;
 $(document).ready(function(){
+
+
 zXadrex();
 zPopular();
 zBordas();
@@ -13,8 +15,20 @@ zLado();
 
 
   $(".debugbutton").on("click", zBDebug);
-
+  $(".resetbutton").on("click", zRestart);
 });
+
+function zRestart() {
+  if(confirm("de certeza?")){
+  mikas=0;
+  $("table").remove();
+  $(".jogo").append("<table></table>");
+  zXadrex();
+  zPopular();
+  zBordas();
+  zLado();
+  } else{alert("Uff que sorte! quase que já ia tudo!");}
+}
 
 function zForcarComer() {
 tracking = 0;
@@ -135,6 +149,11 @@ function zBDebug() {
   zDebug([x,y,x-y]);
 }
 
+function zDescobrirRainha() {
+  var x = zDescobrirIndex($(".DJ").parent("td"));
+  if($(".DJ").hasClass('amarela') && x<8) {$(".DJ").addClass('rainha')}
+  if($(".DJ").hasClass('vermelha') && x>55) {$(".DJ").addClass('rainha')}
+}
 
 function zJogar(){
   var DJ = $(".DJ");
@@ -142,6 +161,7 @@ function zJogar(){
   $(this).append(DJ);
   $(".PK").unbind("click",zKill).removeClass('PK');
   $(".PP").unbind("click",zJogar).removeClass('PP');
+  zDescobrirRainha();
   $(".DJ").on("click", zEscolherDama).removeClass('DJ');
   $(".highlight").removeClass('highlight');
   console.log("zlado chamado pelo zjogar");
